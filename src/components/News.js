@@ -11,7 +11,9 @@ export default class News extends Component {
       }
     }
     newsapi = async ()=> {
-        let data = await fetch("https://newsapi.org/v2/everything?apiKey=3a9222a16c494952a91caf14bddfa6ab&q=anime&pageSize=16&page=" + this.state.page);
+        let url =  "https://newsapi.org/v2/everything?apiKey=3a9222a16c494952a91caf14bddfa6ab&q=anime&pageSize=16&page=" + this.state.page
+        console.log( "newsapi runnigng" + url)
+        let data = await fetch(url);
         let parsedData = await data.json();
         
         this.setState({
@@ -26,7 +28,7 @@ export default class News extends Component {
 
     handlenext = async () =>{
         console.log("handlenext running")
-        this.setState({
+        await this.setState({
             page :this.state.page +1
         })
         await this.newsapi();
@@ -34,7 +36,7 @@ export default class News extends Component {
 
     handleprev = async () =>{
         console.log("handleprev running")
-        this.setState({
+        await this.setState({
             page :this.state.page -1
         })
         await this.newsapi();
@@ -43,7 +45,7 @@ export default class News extends Component {
         return (
            
             <div className="container my-3">
-                {console.log("render" + this.state.page)}
+                {console.log("render " + this.state.page)}
                 
                 <div className="row">
                 {this.state.articles.map((element)=>{
