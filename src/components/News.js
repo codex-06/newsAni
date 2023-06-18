@@ -19,25 +19,25 @@ export default class News extends Component {
         })
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         console.log("cdm running")
-        this.newsapi();
+        await this.newsapi();
     }
 
-    handlenext = () =>{
+    handlenext = async () =>{
         console.log("handlenext running")
         this.setState({
             page :this.state.page +1
         })
-        this.newsapi();
+        await this.newsapi();
     }
 
-    handleprev = () =>{
+    handleprev = async () =>{
         console.log("handleprev running")
         this.setState({
             page :this.state.page -1
         })
-        this.newsapi();
+        await this.newsapi();
     }
     render() {
         return (
