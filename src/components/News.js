@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Card from './Card'
+import Spinner from './Spinner';
 
 
 export default class News extends Component {
@@ -7,7 +8,8 @@ export default class News extends Component {
       super();
       this.state = {
         articles: [],
-        page:1
+        page:1,
+        loading: true
       }
     }
     newsapi = async ()=> {
@@ -18,6 +20,7 @@ export default class News extends Component {
         
         this.setState({
             articles: parsedData.articles,
+            loading:false
         })
     }
 
@@ -29,7 +32,9 @@ export default class News extends Component {
     handlenext = async () =>{
         console.log("handlenext running")
         await this.setState({
-            page :this.state.page +1
+            articles:[],
+            page :this.state.page +1,
+            loading :true
         })
         await this.newsapi();
     }
@@ -37,7 +42,9 @@ export default class News extends Component {
     handleprev = async () =>{
         console.log("handleprev running")
         await this.setState({
-            page :this.state.page -1
+            articles:[],
+            page :this.state.page -1,
+            loading:true
         })
         await this.newsapi();
     }
@@ -46,7 +53,7 @@ export default class News extends Component {
            
             <div className="container my-3">
                 {console.log("render " + this.state.page)}
-                
+                {this.state.loading && <Spinner></Spinner>}
                 <div className="row">
                 {this.state.articles.map((element)=>{
                     return <div className="col-3" key = {element.url}>
@@ -56,7 +63,7 @@ export default class News extends Component {
                 
                 </div>  
                 <div className="container my-3 nextButtons">
-                <button type="button" className="mx-3 btn btn-primary" onClick={this.handleprev}>&lt;&lt;</button> 
+                <button type="button" disabled = {this.state.page ===1}className="mx-3 btn btn-primary" onClick={this.handleprev}>&lt;&lt;</button> 
                 {this.state.page}
                 <button type="button" className="mx-3 btn btn-primary" onClick={this.handlenext}>&gt;&gt;</button>
 
