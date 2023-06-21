@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Navbar() {
   return (
@@ -22,10 +23,12 @@ export default function Navbar() {
             Dropdown
           </a>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="/">Action</a></li>
-            <li><a className="dropdown-item" href="/">Another action</a></li>
-            <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="/">Something else here</a></li>
+          {/* <li><a  href = "/"className="dropdown-item" >Naruto</a></li>
+          <li><a  href = "/"className="dropdown-item" >OnePiece</a></li>
+          <li><a  href = "/"className="dropdown-item" >Bleach</a></li> */}
+          <li className="dropdown-item"><Link to = "/"  /> naruto</li>
+          <li className="dropdown-item"><Link to = "/" /> bleach</li>
+          <li className="dropdown-item"><Link to = "/" /> Onepiece</li>
           </ul>
         </li>
       </ul>

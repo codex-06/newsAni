@@ -13,7 +13,7 @@ export default class News extends Component {
       }
     }
     newsapi = async ()=> {
-        let url =  "https://newsapi.org/v2/everything?apiKey=3a9222a16c494952a91caf14bddfa6ab&q=anime&pageSize=16&page=" + this.state.page
+        let url =  "https://newsapi.org/v2/everything?apiKey=3a9222a16c494952a91caf14bddfa6ab&q=anime&pageSize=15&page=" + this.state.page
         console.log( "newsapi runnigng" + url)
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -22,6 +22,7 @@ export default class News extends Component {
             articles: parsedData.articles,
             loading:false
         })
+        window.scrollTo(0, 0) 
     }
 
     async componentDidMount(){
@@ -56,7 +57,7 @@ export default class News extends Component {
                 {this.state.loading && <Spinner></Spinner>}
                 <div className="row">
                 {this.state.articles.map((element)=>{
-                    return <div className="col-3" key = {element.url}>
+                    return <div className="col-4" key = {element.url}>
                     <Card imgUrl = {element.urlToImage? element.urlToImage: "https://static1.colliderimages.com/wordpress/wp-content/uploads/2023/01/characters-from-atack-on-titan-naruto-and-my-hero-academia.jpg"} title = {element.title} description = {element.description ?element.description.slice(0,88):""}  url = {element.url}/>
                             </div>
                 })}
